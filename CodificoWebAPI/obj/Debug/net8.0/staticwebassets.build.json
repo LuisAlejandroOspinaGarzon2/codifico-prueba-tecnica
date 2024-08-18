@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "MkZdEojGcB2NqjzGhoV+a3fyCTIrvGTS2qxHl7rkcgA=",
+  "Source": "CodificoWebAPI",
+  "BasePath": "_content/CodificoWebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

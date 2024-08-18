@@ -1,0 +1,6 @@
+@CodificoWebAPI_HostAddress = http://localhost:5011
+
+GET {{CodificoWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

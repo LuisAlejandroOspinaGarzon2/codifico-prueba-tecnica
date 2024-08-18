@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodificoWebAPI", "CodificoWebAPI\CodificoWebAPI.csproj", "{0BEE9952-936F-4B43-855B-5BDA741BD119}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodificoWebAPI.Tests", "CodificoWebAPI.Tests\CodificoWebAPI.Tests.csproj", "{C547B8B1-4D1B-496E-836C-C2685F9BF444}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BEE9952-936F-4B43-855B-5BDA741BD119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BEE9952-936F-4B43-855B-5BDA741BD119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BEE9952-936F-4B43-855B-5BDA741BD119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BEE9952-936F-4B43-855B-5BDA741BD119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C547B8B1-4D1B-496E-836C-C2685F9BF444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C547B8B1-4D1B-496E-836C-C2685F9BF444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C547B8B1-4D1B-496E-836C-C2685F9BF444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C547B8B1-4D1B-496E-836C-C2685F9BF444}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FD1B68E-CD56-4484-8E3D-AF40F0647E42}
+	EndGlobalSection
+EndGlobal
