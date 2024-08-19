@@ -1,0 +1,31 @@
+<div class="orders-container">
+    <h2>Orders for {{ customerName }}</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th (click)="sortData('orderId')">Order ID</th>
+          <th (click)="sortData('orderDate')">Order Date</th>
+          <th (click)="sortData('shipName')">Ship Name</th>
+          <th (click)="sortData('shipCity')">Ship City</th>
+          <th (click)="sortData('freight')">Freight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of paginatedOrders">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.orderDate}}</td>
+          <td>{{ order.shipName }}</td>
+          <td>{{ order.shipCity }}</td>
+          <td>{{ order.freight}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  

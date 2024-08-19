@@ -108,6 +108,12 @@ namespace CodificoWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("ProductsController is working!");
+        }
+
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ProductId == id);

@@ -22,11 +22,9 @@ namespace CodificoWebAPI.Tests.Controllers
             _context = new ApplicationDbContext(options);
             _controller = new OrdersController(_context);
 
-            // Limpia la base de datos antes de cada prueba
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
 
-            // Inserta datos de prueba sin especificar IDs
             var customer = new Customer { CompanyName = "TestCompany" };
             _context.Customers.Add(customer);
             _context.SaveChanges();
@@ -47,7 +45,7 @@ namespace CodificoWebAPI.Tests.Controllers
             _context.Orders.Add(order2);
             _context.SaveChanges();
 
-            Assert.Equal(2, _context.Orders.Count()); // Verifica que se agregaron las órdenes
+            Assert.Equal(2, _context.Orders.Count());
         }
 
 
@@ -67,13 +65,12 @@ namespace CodificoWebAPI.Tests.Controllers
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
             var orders = Assert.IsType<List<Order>>(okResult.Value);
-            Assert.Equal(2, orders.Count);  // Verificamos que se obtienen las 2 órdenes.
+            Assert.Equal(2, orders.Count); 
         }
 
         [Fact]
         public async Task GetOrder_ReturnsOrderById()
         {
-            // Verificar si _controller es null
             if (_controller == null)
             {
                 Assert.Fail("Controller is not initialized.");
@@ -86,7 +83,7 @@ namespace CodificoWebAPI.Tests.Controllers
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
             var order = Assert.IsType<OrderDto>(okResult.Value);
-            Assert.Equal(1, order.OrderId);  // Verificamos que la orden es la correcta.
+            Assert.Equal(1, order.OrderId); 
         }
 
     }

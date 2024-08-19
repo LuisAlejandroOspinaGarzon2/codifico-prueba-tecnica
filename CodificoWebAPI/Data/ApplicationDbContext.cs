@@ -23,28 +23,70 @@ namespace CodificoWebAPI.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Customer>()
+                .ToTable("Customers", "Sales")
                 .HasKey(c => c.CustId);
 
             modelBuilder.Entity<Employee>()
+                .ToTable("Employees", "HR")
                 .HasKey(e => e.EmpId);
 
             modelBuilder.Entity<Supplier>()
+                .ToTable("Suppliers", "Production")
                 .HasKey(s => s.SupplierId);
 
             modelBuilder.Entity<Category>()
+                .ToTable("Categories", "Production")
                 .HasKey(c => c.CategoryId);
 
             modelBuilder.Entity<Product>()
+                .ToTable("Products", "Production")
                 .HasKey(p => p.ProductId);
 
+            modelBuilder.Entity<Product>()
+                .Property(p => p.UnitPrice)
+                .HasColumnType("decimal(18,2)");
+
             modelBuilder.Entity<Shipper>()
+                .ToTable("Shippers", "Sales")
                 .HasKey(s => s.ShipperId);
 
             modelBuilder.Entity<Order>()
+                .ToTable("Orders", "Sales")
                 .HasKey(o => o.OrderId);
 
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Freight)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Customer)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.CustId)
+                .HasConstraintName("FK_Orders_Customers");
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Employee)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(o => o.EmpId)
+                .HasConstraintName("FK_Orders_Employees");
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Shipper)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(o => o.ShipperId)
+                .HasConstraintName("FK_Orders_Shippers");
+
             modelBuilder.Entity<OrderDetail>()
+                .ToTable("OrderDetails", "Sales")
                 .HasKey(od => new { od.OrderId, od.ProductId });
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(od => od.UnitPrice)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(od => od.Discount)
+                .HasColumnType("decimal(18,2)");
 
             modelBuilder.Entity<OrderDetail>()
                 .HasOne(od => od.Order)
@@ -66,7 +108,7 @@ namespace CodificoWebAPI.Data
     public class Customer
     {
         public int CustId { get; set; }
-        public string CompanyName { get; set; } = string.Empty;  // Cambiar de nuevo a CompanyName
+        public string CompanyName { get; set; } = string.Empty;
         public string? ContactName { get; set; }
         public string? ContactTitle { get; set; }
         public string? Address { get; set; }

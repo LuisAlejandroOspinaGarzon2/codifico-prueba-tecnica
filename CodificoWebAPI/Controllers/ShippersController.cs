@@ -107,6 +107,12 @@ namespace CodificoWebAPI.Controllers
             return NoContent();
         }
 
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("EmployeesController is working!");
+        }
+
         private bool ShipperExists(int id)
         {
             return _context.Shippers.Any(e => e.ShipperId == id);

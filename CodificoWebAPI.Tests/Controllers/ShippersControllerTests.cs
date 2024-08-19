@@ -23,11 +23,9 @@ namespace CodificoWebAPI.Tests.Controllers
             _context = new ApplicationDbContext(options);
             _controller = new ShippersController(_context);
 
-            // Limpiar la base de datos antes de agregar nuevos datos
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
 
-            // Seed de datos de prueba
             var shipper1 = new Shipper { ShipperId = 1, CompanyName = "Fast Shipping" };
             var shipper2 = new Shipper { ShipperId = 2, CompanyName = "Global Shippers" };
             _context.Shippers.AddRange(shipper1, shipper2);

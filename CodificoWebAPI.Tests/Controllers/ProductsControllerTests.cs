@@ -26,10 +26,8 @@ namespace CodificoWebAPI.Tests.Controllers
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
 
-            // Verificar que la base de datos esté vacía
             Assert.Empty(_context.Products.ToList());
 
-            // Seed de datos de prueba
             var product1 = new Product { ProductId = 1, ProductName = "TestProduct1" };
             var product2 = new Product { ProductId = 2, ProductName = "TestProduct2" };
             _context.Products.Add(product1);
@@ -37,14 +35,12 @@ namespace CodificoWebAPI.Tests.Controllers
 
             _context.SaveChanges();
 
-            // Verificar que los productos se han agregado correctamente
             Assert.Equal(2, _context.Products.Count());
         }
 
         [Fact]
         public async Task GetProducts_ReturnsAllProducts()
         {
-            // Verificar si _controller es null
             if (_controller == null)
             {
                 Assert.Fail("Controller is not initialized.");

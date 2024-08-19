@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodificoWebAPI.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d42739f46366439ae79c36dbf4c36486cf7510a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6992ab4b0227e4292db2cf9ad51f2a39d37ac130")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodificoWebAPI.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodificoWebAPI.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

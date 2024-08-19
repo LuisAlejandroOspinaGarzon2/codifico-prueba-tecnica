@@ -119,6 +119,14 @@ namespace CodificoWebAPI.Controllers
             return NoContent();
         }
 
+        // GET: api/Customers/Test
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("CustomerController is working!");
+        }
+
+
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.CustId == id);

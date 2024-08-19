@@ -9,7 +9,7 @@ namespace CodificoWebAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        
+
         // Constructor que inyecta el contexto de la base de datos
         public OrdersController(ApplicationDbContext context)
         {
@@ -21,7 +21,7 @@ namespace CodificoWebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
             var orders = await _context.Orders.ToListAsync();
-            return Ok(orders); 
+            return Ok(orders);
         }
 
         // GET: api/Orders/{id}
@@ -53,39 +53,74 @@ namespace CodificoWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder(CreateOrderDto orderDto)
         {
-            var order = new Order
+            try
             {
-                CustId = orderDto.CustId,
-                EmpId = orderDto.EmpId,
-                OrderDate = orderDto.OrderDate,
-                RequiredDate = orderDto.RequiredDate,
-                ShippedDate = orderDto.ShippedDate,
-                ShipperId = orderDto.ShipperId,
-                Freight = orderDto.Freight,
-                ShipName = orderDto.ShipName,
-                ShipAddress = orderDto.ShipAddress,
-                ShipCity = orderDto.ShipCity,
-                ShipRegion = orderDto.ShipRegion,
-                ShipPostalCode = orderDto.ShipPostalCode,
-                ShipCountry = orderDto.ShipCountry
-            };
+                // Verificar si el cliente existe
+                var customerExists = await _context.Customers.AnyAsync(c => c.CustId == orderDto.CustId);
+                if (!customerExists)
+                {
+                    return BadRequest(new { message = $"Customer with ID {orderDto.CustId} does not exist." });
+                }
 
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+                // Verificar si el empleado existe
+                var employeeExists = await _context.Employees.AnyAsync(e => e.EmpId == orderDto.EmpId);
+                if (!employeeExists)
+                {
+                    return BadRequest(new { message = $"Employee with ID {orderDto.EmpId} does not exist." });
+                }
 
-            var orderDetail = new OrderDetail
+                // Verificar si el transportista existe
+                var shipperExists = await _context.Shippers.AnyAsync(s => s.ShipperId == orderDto.ShipperId);
+                if (!shipperExists)
+                {
+                    return BadRequest(new { message = $"Shipper with ID {orderDto.ShipperId} does not exist." });
+                }
+
+                // Verificar si el producto existe
+                var productExists = await _context.Products.AnyAsync(p => p.ProductId == orderDto.ProductId);
+                if (!productExists)
+                {
+                    return BadRequest(new { message = $"Product with ID {orderDto.ProductId} does not exist." });
+                }
+
+                var order = new Order
+                {
+                    CustId = orderDto.CustId,
+                    EmpId = orderDto.EmpId,
+                    OrderDate = orderDto.OrderDate,
+                    RequiredDate = orderDto.RequiredDate,
+                    ShippedDate = orderDto.ShippedDate,
+                    ShipperId = orderDto.ShipperId,
+                    Freight = orderDto.Freight,
+                    ShipName = orderDto.ShipName,
+                    ShipAddress = orderDto.ShipAddress,
+                    ShipCity = orderDto.ShipCity,
+                    ShipRegion = orderDto.ShipRegion,
+                    ShipPostalCode = orderDto.ShipPostalCode,
+                    ShipCountry = orderDto.ShipCountry
+                };
+
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+
+                var orderDetail = new OrderDetail
+                {
+                    OrderId = order.OrderId,
+                    ProductId = orderDto.ProductId,
+                    UnitPrice = orderDto.UnitPrice,
+                    Qty = orderDto.Qty,
+                    Discount = orderDto.Discount
+                };
+
+                _context.OrderDetails.Add(orderDetail);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
+            }
+            catch (Exception ex)
             {
-                OrderId = order.OrderId,
-                ProductId = orderDto.ProductId,
-                UnitPrice = orderDto.UnitPrice,
-                Qty = orderDto.Qty,
-                Discount = orderDto.Discount
-            };
-
-            _context.OrderDetails.Add(orderDetail);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
+            }
         }
 
         // PUT: api/Orders/{id}
@@ -132,6 +167,12 @@ namespace CodificoWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("OrdersController is working!");
         }
 
         private bool OrderExists(int id)

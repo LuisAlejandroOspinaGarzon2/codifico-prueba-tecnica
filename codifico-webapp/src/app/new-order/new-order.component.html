@@ -1,0 +1,84 @@
+<h3 class="order-header">Customer AHPOP - New Order</h3>
+
+<div class="order-form">
+  <div class="form-section">
+    <h4>Order</h4>
+    <div class="form-group">
+      <label for="employee">Employee*</label>
+      <select id="employee" name="employee" [(ngModel)]="order.employee" [disabled]="isSaving">
+        <option *ngFor="let employee of employees" [value]="employee.empId">
+          {{ employee.fullName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="shipper">Shipper*</label>
+      <select id="shipper" name="shipper" [(ngModel)]="order.shipper" [disabled]="isSaving">
+        <option *ngFor="let shipper of shippers" [value]="shipper.shipperId">
+          {{ shipper.companyName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="shipName">Ship Name*</label>
+      <input type="text" id="shipName" name="shipName" [(ngModel)]="order.shipName" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="shipAddress">Ship Address*</label>
+      <input type="text" id="shipAddress" name="shipAddress" [(ngModel)]="order.shipAddress" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="shipCity">Ship City*</label>
+      <input type="text" id="shipCity" name="shipCity" [(ngModel)]="order.shipCity" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="shipCountry">Ship Country*</label>
+      <input type="text" id="shipCountry" name="shipCountry" [(ngModel)]="order.shipCountry" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="orderDate">Order Date*</label>
+      <input type="date" id="orderDate" name="orderDate" [(ngModel)]="order.orderDate" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="requiredDate">Required Date*</label>
+      <input type="date" id="requiredDate" name="requiredDate" [(ngModel)]="order.requiredDate" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="shippedDate">Shipped Date</label>
+      <input type="date" id="shippedDate" name="shippedDate" [(ngModel)]="order.shippedDate" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="freight">Freight*</label>
+      <input type="number" id="freight" name="freight" [(ngModel)]="order.freight" [disabled]="isSaving" />
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h4>Order Details</h4>
+    <div class="form-group">
+      <label for="product">Product*</label>
+      <select id="product" name="product" [(ngModel)]="order.product" [disabled]="isSaving">
+        <option *ngFor="let product of products" [value]="product.productId">
+          {{ product.productName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="unitPrice">Unit Price*</label>
+      <input type="number" id="unitPrice" name="unitPrice" [(ngModel)]="order.unitPrice" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity*</label>
+      <input type="number" id="quantity" name="quantity" [(ngModel)]="order.quantity" [disabled]="isSaving" />
+    </div>
+    <div class="form-group">
+      <label for="discount">Discount*</label>
+      <input type="number" id="discount" name="discount" [(ngModel)]="order.discount" [disabled]="isSaving" />
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" (click)="onClose()" [disabled]="isSaving">Close</button>
+    <button type="button" (click)="onSave()" [disabled]="isSaving">Save</button>
+  </div>
+</div>
